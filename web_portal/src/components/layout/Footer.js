@@ -16,11 +16,8 @@ import { FaTwitter, FaGithub, FaDiscord, FaTelegram } from 'react-icons/fa';
 export default function Footer() {
   return (
     <Box
-      bg={useColorModeValue('white', 'gray.800')}
+      className="glass-footer"
       color={useColorModeValue('gray.600', 'white')}
-      borderTop={1}
-      borderStyle={'solid'}
-      borderColor={useColorModeValue('gray.200', 'gray.700')}
     >
       <Container
         as={Stack}
@@ -40,16 +37,16 @@ export default function Footer() {
             <Link href={'#'}>Contact</Link>
           </Stack>
           <HStack spacing={6} mt={{ base: 4, md: 0 }}>
-            <Link href={'#'} isExternal>
+            <Link href={'#'} isExternal className="glow-effect">
               <Icon as={FaTwitter} w={5} h={5} />
             </Link>
-            <Link href={'#'} isExternal>
+            <Link href={'#'} isExternal className="glow-effect">
               <Icon as={FaGithub} w={5} h={5} />
             </Link>
-            <Link href={'#'} isExternal>
+            <Link href={'#'} isExternal className="glow-effect">
               <Icon as={FaDiscord} w={5} h={5} />
             </Link>
-            <Link href={'#'} isExternal>
+            <Link href={'#'} isExternal className="glow-effect">
               <Icon as={FaTelegram} w={5} h={5} />
             </Link>
           </HStack>

@@ -2,22 +2,25 @@ import React from "react";
 import {
     Box,
     Flex,
-    HStack,
-    Link,
+    Text,
     IconButton,
     Button,
+    Stack,
+    Collapse,
+    Icon,
+    Link,
+    Image,
+    useColorModeValue,
+    useDisclosure,
+    HStack,
     Menu,
     MenuButton,
     MenuList,
     MenuItem,
-    useDisclosure,
-    useColorModeValue,
-    Stack,
-    Image,
-    Text,
 } from "@chakra-ui/react";
 import {AiOutlineMenu, AiOutlineClose, AiOutlineDown} from "react-icons/ai";
 import {Link as RouterLink} from "react-router-dom";
+import ThemeToggle from "../ThemeToggle";
 
 const Links = [
     {name: "Home", path: "/"},
@@ -31,7 +34,6 @@ const Links = [
 const NavLink = ({children, path}) => {
   console.log("Rendering NavLink with children:", children);
   const bgHover = useColorModeValue("gray.200", "gray.700");
-
     return (
         <Link
             as={RouterLink}
@@ -52,13 +54,13 @@ const NavLink = ({children, path}) => {
 export default function Navbar() {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [isWalletConnected, setIsWalletConnected] = React.useState(false);
-
+    
     const handleConnectWallet = () => {
         setIsWalletConnected(true);
     };
-
+    
     return (
-        <Box bg={useColorModeValue("white", "gray.900")} px={4} boxShadow="sm">
+        <Box className="glass-nav" px={4} boxShadow="sm">
             <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
                 <IconButton
                     size={"md"}
@@ -66,6 +68,7 @@ export default function Navbar() {
                     aria-label={"Open Menu"}
                     display={{md: "none"}}
                     onClick={isOpen ? onClose : onOpen}
+                    className="glass-button"
                 />
                 <HStack spacing={8} alignItems={"center"}>
                     <Box>
@@ -93,6 +96,11 @@ export default function Navbar() {
                     </HStack>
                 </HStack>
                 <Flex alignItems={"center"}>
+                    {/* Theme Toggle Button */}
+                    <Box mr={3}>
+                        <ThemeToggle />
+                    </Box>
+                    
                     {isWalletConnected ? (
                         <Menu>
                             <MenuButton
@@ -106,10 +114,11 @@ export default function Navbar() {
                                 color="white"
                                 px={4}
                                 py={2}
+                                className="glass-button"
                             >
                                 0x1a2...3b4c
                             </MenuButton>
-                            <MenuList>
+                            <MenuList className="glass-dark">
                                 <MenuItem>My Wallet</MenuItem>
                                 <MenuItem>Transactions</MenuItem>
                                 <MenuItem>Settings</MenuItem>
@@ -124,13 +133,13 @@ export default function Navbar() {
                                 bgGradient: "linear(to-r, cyan.500, blue.600)",
                             }}
                             onClick={handleConnectWallet}
+                            className="glass-button glow-effect"
                         >
                             Connect Wallet
                         </Button>
                     )}
                 </Flex>
             </Flex>
-
             {isOpen ? (
                 <Box pb={4} display={{md: "none"}}>
                     <Stack as={"nav"} spacing={4}>
