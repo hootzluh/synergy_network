@@ -3,19 +3,25 @@ import { extendTheme } from '@chakra-ui/react';
 // Define the colors for both light and dark mode
 const colors = {
   synergy: {
-    50: '#e6f1ff',
-    100: '#c0d7ff',
-    200: '#99bdff',
-    300: '#73a4ff',
-    400: '#4c8aff',
-    500: '#2670ff', // Primary blue color
-    600: '#1a5cd9',
-    700: '#0e48b3',
-    800: '#03348c',
-    900: '#002066',
+    50: '#E9F5FF',
+    100: '#D1EBFF',
+    200: '#A3D7FF',
+    300: '#75C3FF',
+    400: '#47AFFF',
+    500: '#1399FF', // Primary blue color
+    600: '#0F7AD9',
+    700: '#0B5CB3',
+    800: '#073D8C',
+    900: '#031F66',
+  },
+  secondary: {
+    500: '#0500A3', // Secondary color
+  },
+  tertiary: {
+    500: '#2A2A2A', // Tertiary color
   },
   accent: {
-    500: '#00d1c7', // Accent teal color
+    500: '#E9F5FF', // Accent/border color
   },
 };
 

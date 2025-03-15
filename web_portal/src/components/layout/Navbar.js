@@ -7,7 +7,6 @@ import {
     Button,
     Stack,
     Collapse,
-    Icon,
     Link,
     Image,
     useColorModeValue,
@@ -74,12 +73,12 @@ export default function Navbar() {
                     <Box>
                         <RouterLink to="/">
                             <Flex align="center">
-                                <Image src="/images/logo.png" alt="Synergy Network" height="40px" />
+                                <Image src="/images/syn.png" alt="Synergy Network" height="40px" />
                                 <Text
                                     ml={3}
                                     fontWeight="bold"
                                     fontSize="xl"
-                                    bgGradient="linear(to-r, cyan.400, blue.500)"
+                                    bgGradient="linear(to-r, #1399FF, #0500A3)"
                                     bgClip="text"
                                 >
                                     Synergy Network
@@ -110,7 +109,7 @@ export default function Navbar() {
                                 cursor={"pointer"}
                                 minW={0}
                                 rightIcon={<AiOutlineDown />}
-                                bgGradient="linear(to-r, cyan.400, blue.500)"
+                                bgGradient="linear(to-r, #1399FF, #0500A3)"
                                 color="white"
                                 px={4}
                                 py={2}
@@ -127,10 +126,11 @@ export default function Navbar() {
                         </Menu>
                     ) : (
                         <Button
-                            bgGradient="linear(to-r, cyan.400, blue.500)"
+                            bgGradient="linear(to-r, #1399FF, #0500A3)"
                             color="white"
                             _hover={{
-                                bgGradient: "linear(to-r, cyan.500, blue.600)",
+                                bgGradient: "linear(to-r, #1399FF, #0500A3)",
+                                opacity: 0.9
                             }}
                             onClick={handleConnectWallet}
                             className="glass-button glow-effect"

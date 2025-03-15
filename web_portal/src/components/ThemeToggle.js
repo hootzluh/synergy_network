@@ -12,7 +12,7 @@ const ThemeToggle = () => {
         icon={colorMode === 'dark' ? <FaSun /> : <FaMoon />}
         onClick={toggleColorMode}
         variant="ghost"
-        color={colorMode === 'dark' ? 'yellow.200' : 'purple.700'}
+        color={colorMode === 'dark' ? '#1399FF' : '#0500A3'}
         _hover={{
           bg: colorMode === 'dark' ? 'whiteAlpha.200' : 'blackAlpha.200',
         }}
