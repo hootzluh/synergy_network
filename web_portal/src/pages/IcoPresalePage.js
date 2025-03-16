@@ -18,7 +18,6 @@ import {
   Progress,
   Divider,
   useToast,
-  Image,
   Badge,
   Flex,
   Card,
@@ -55,7 +54,7 @@ const IcoPresalePage = () => {
   // Calculate equivalent SYN tokens based on payment amount
   const calculateTokens = (amount) => {
     const priceInUSD = 0.018; // Current price tier
-    
+
     // Simplified conversion rates (in production would use real-time rates)
     const conversionRates = {
       ETH: 3000, // 1 ETH = $3000
@@ -63,9 +62,9 @@ const IcoPresalePage = () => {
       USDT: 1,
       USDC: 1
     };
-    
+
     if (!amount || isNaN(amount)) return 0;
-    
+
     const usdValue = amount * conversionRates[paymentMethod];
     return Math.floor(usdValue / priceInUSD);
   };
@@ -83,7 +82,7 @@ const IcoPresalePage = () => {
     }
 
     const tokens = calculateTokens(amount);
-    
+
     if (tokens < 500) {
       toast({
         title: 'Below minimum purchase',
@@ -117,16 +116,16 @@ const IcoPresalePage = () => {
   };
 
   // Calculate progress percentage
-  const progressPercentage = (parseFloat(icoDetails.raised.replace(/,/g, '')) / 
+  const progressPercentage = (parseFloat(icoDetails.raised.replace(/,/g, '')) /
                              parseFloat(icoDetails.goal.replace(/,/g, ''))) * 100;
 
   return (
     <Container maxW="7xl" py={8}>
       <VStack spacing={8} align="stretch">
         {/* Hero Section */}
-        <Box 
-          p={8} 
-          borderRadius="lg" 
+        <Box
+          p={8}
+          borderRadius="lg"
           bgGradient="linear(to-r, synergy.700, synergy.500)"
           color="white"
           textAlign="center"
@@ -137,11 +136,11 @@ const IcoPresalePage = () => {
           <Text fontSize="xl" maxW="3xl" mx="auto">
             Join the future of collaborative blockchain technology with Proof of Synergy consensus and Post-Quantum Cryptography
           </Text>
-          <Button 
-            mt={6} 
-            size="lg" 
-            colorScheme="white" 
-            variant="outline" 
+          <Button
+            mt={6}
+            size="lg"
+            colorScheme="white"
+            variant="outline"
             _hover={{ bg: 'whiteAlpha.200' }}
             onClick={() => document.getElementById('purchase-section').scrollIntoView({ behavior: 'smooth' })}
           >
@@ -165,7 +164,7 @@ const IcoPresalePage = () => {
               </CardBody>
             </Card>
           </GridItem>
-          
+
           <GridItem>
             <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="full">
               <CardHeader pb={0}>
@@ -180,7 +179,7 @@ const IcoPresalePage = () => {
               </CardBody>
             </Card>
           </GridItem>
-          
+
           <GridItem>
             <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="full">
               <CardHeader pb={0}>
@@ -208,10 +207,10 @@ const IcoPresalePage = () => {
           </CardHeader>
           <CardBody>
             <VStack align="stretch" spacing={4}>
-              <Progress 
-                value={progressPercentage} 
-                size="lg" 
-                colorScheme="synergy" 
+              <Progress
+                value={progressPercentage}
+                size="lg"
+                colorScheme="synergy"
                 borderRadius="md"
               />
               <Flex justify="space-between">
@@ -234,10 +233,10 @@ const IcoPresalePage = () => {
             <Grid templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(3, 1fr)" }} gap={6}>
               {icoDetails.tiers.map((tier, index) => (
                 <GridItem key={index}>
-                  <VStack 
-                    p={4} 
-                    borderWidth="1px" 
-                    borderRadius="md" 
+                  <VStack
+                    p={4}
+                    borderWidth="1px"
+                    borderRadius="md"
                     borderColor={borderColor}
                     align="stretch"
                     spacing={3}
@@ -245,8 +244,8 @@ const IcoPresalePage = () => {
                     <Heading size="sm">{tier.name}</Heading>
                     <Text fontSize="2xl" fontWeight="bold">{tier.price}</Text>
                     <Text>Allocation: {tier.allocation}</Text>
-                    <Badge 
-                      alignSelf="flex-start" 
+                    <Badge
+                      alignSelf="flex-start"
                       colorScheme={tier.status === 'Active' ? 'green' : 'gray'}
                     >
                       {tier.status}
@@ -269,8 +268,8 @@ const IcoPresalePage = () => {
                 <VStack spacing={6} align="stretch">
                   <Box>
                     <Text mb={2}>Payment Method</Text>
-                    <Select 
-                      value={paymentMethod} 
+                    <Select
+                      value={paymentMethod}
                       onChange={(e) => setPaymentMethod(e.target.value)}
                     >
                       <option value="ETH">Ethereum (ETH)</option>
@@ -279,19 +278,19 @@ const IcoPresalePage = () => {
                       <option value="USDC">USD Coin (USDC)</option>
                     </Select>
                   </Box>
-                  
+
                   <Box>
                     <Text mb={2}>Amount</Text>
-                    <Input 
-                      placeholder={`Enter amount in ${paymentMethod}`} 
-                      value={amount} 
+                    <Input
+                      placeholder={`Enter amount in ${paymentMethod}`}
+                      value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       type="number"
                     />
                   </Box>
-                  
+
                   <Divider />
-                  
+
                   <Box>
                     <Text mb={2}>You will receive</Text>
                     <HStack>
@@ -301,10 +300,10 @@ const IcoPresalePage = () => {
                       <Text>SYN Tokens</Text>
                     </HStack>
                   </Box>
-                  
-                  <Button 
-                    colorScheme="synergy" 
-                    size="lg" 
+
+                  <Button
+                    colorScheme="synergy"
+                    size="lg"
                     onClick={handlePurchase}
                     isDisabled={!amount || isNaN(amount) || amount <= 0}
                   >
@@ -312,13 +311,13 @@ const IcoPresalePage = () => {
                   </Button>
                 </VStack>
               </GridItem>
-              
+
               <GridItem>
-                <VStack 
-                  spacing={4} 
-                  p={6} 
-                  bg="gray.50" 
-                  borderRadius="md" 
+                <VStack
+                  spacing={4}
+                  p={6}
+                  bg="gray.50"
+                  borderRadius="md"
                   height="100%"
                   justify="center"
                   align="flex-start"
@@ -330,9 +329,9 @@ const IcoPresalePage = () => {
                   <Text>• Minimum purchase: 500 SYN</Text>
                   <Text>• Maximum purchase: 1,000,000 SYN per wallet</Text>
                   <Text>• Current price: $0.018 per SYN</Text>
-                  
+
                   <Divider />
-                  
+
                   <Text fontSize="sm" color="gray.600">
                     By participating in the ICO, you agree to the terms and conditions of the Synergy Network token sale.
                   </Text>

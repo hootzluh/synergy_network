@@ -63,7 +63,7 @@ export default function ExplorerPage() {
     <Container maxW="7xl" py={8} className="content-container">
       <Box className="glass-container">
         <Heading as="h1" mb={8}>Blockchain Explorer</Heading>
-        
+
         {/* Search Bar */}
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" mb={8} className="glass-card">
           <CardBody>
@@ -85,7 +85,7 @@ export default function ExplorerPage() {
             </VStack>
           </CardBody>
         </Card>
-        
+
         {/* Explorer Tabs */}
         <Tabs colorScheme="synergy" variant="enclosed" isLazy>
           <TabList>
@@ -93,7 +93,7 @@ export default function ExplorerPage() {
             <Tab><Icon as={FaExchangeAlt} mr={2} /> Transactions</Tab>
             <Tab><Icon as={FaUser} mr={2} /> Validators</Tab>
           </TabList>
-          
+
           <TabPanels>
             {/* Blocks Tab */}
             <TabPanel px={0}>
@@ -136,7 +136,7 @@ export default function ExplorerPage() {
                 </CardBody>
               </Card>
             </TabPanel>
-            
+
             {/* Transactions Tab */}
             <TabPanel px={0}>
               <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" className="glass-card">
@@ -189,7 +189,7 @@ export default function ExplorerPage() {
                 </CardBody>
               </Card>
             </TabPanel>
-            
+
             {/* Validators Tab */}
             <TabPanel px={0}>
               <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" className="glass-card">

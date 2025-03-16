@@ -4,7 +4,6 @@ import {
   Container,
   Heading,
   Text,
-  Flex,
   SimpleGrid,
   VStack,
   HStack,
@@ -14,7 +13,6 @@ import {
   CardBody,
   CardHeader,
   useColorModeValue,
-  Divider,
   List,
   ListItem,
   ListIcon
@@ -29,21 +27,21 @@ export default function DocsPage() {
   return (
     <Container maxW="7xl" py={8}>
       <Heading as="h1" mb={8}>Documentation</Heading>
-      
+
       {/* Introduction */}
       <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" mb={8}>
         <CardBody>
           <VStack spacing={4} align="start">
             <Heading size="lg">Welcome to Synergy Network</Heading>
             <Text>
-              Synergy Network is a next-generation blockchain platform featuring Proof of Synergy consensus and 
-              Post-Quantum Cryptography. This documentation will help you understand the network architecture, 
+              Synergy Network is a next-generation blockchain platform featuring Proof of Synergy consensus and
+              Post-Quantum Cryptography. This documentation will help you understand the network architecture,
               how to interact with the blockchain, and how to build on the platform.
             </Text>
           </VStack>
         </CardBody>
       </Card>
-      
+
       {/* Documentation Categories */}
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} mb={8}>
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="100%">
@@ -63,7 +61,7 @@ export default function DocsPage() {
             </VStack>
           </CardBody>
         </Card>
-        
+
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="100%">
           <CardHeader pb={0}>
             <HStack>
@@ -81,7 +79,7 @@ export default function DocsPage() {
             </VStack>
           </CardBody>
         </Card>
-        
+
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="100%">
           <CardHeader pb={0}>
             <HStack>
@@ -99,7 +97,7 @@ export default function DocsPage() {
             </VStack>
           </CardBody>
         </Card>
-        
+
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="100%">
           <CardHeader pb={0}>
             <HStack>
@@ -117,7 +115,7 @@ export default function DocsPage() {
             </VStack>
           </CardBody>
         </Card>
-        
+
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="100%">
           <CardHeader pb={0}>
             <HStack>
@@ -135,7 +133,7 @@ export default function DocsPage() {
             </VStack>
           </CardBody>
         </Card>
-        
+
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="100%">
           <CardHeader pb={0}>
             <HStack>
@@ -154,10 +152,10 @@ export default function DocsPage() {
           </CardBody>
         </Card>
       </SimpleGrid>
-      
+
       {/* Featured Documentation */}
       <Heading size="lg" mb={4}>Featured Documentation</Heading>
-      
+
       <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" mb={8}>
         <CardHeader>
           <HStack>
@@ -168,11 +166,11 @@ export default function DocsPage() {
         <CardBody>
           <VStack align="start" spacing={4}>
             <Text>
-              Proof of Synergy (PoSy) is a novel consensus mechanism that prioritizes collaboration over competition. 
-              Unlike traditional Proof of Work or Proof of Stake systems, PoSy forms dynamic validator clusters that 
+              Proof of Synergy (PoSy) is a novel consensus mechanism that prioritizes collaboration over competition.
+              Unlike traditional Proof of Work or Proof of Stake systems, PoSy forms dynamic validator clusters that
               work together to process transactions and maintain the network.
             </Text>
-            
+
             <Heading size="sm">Key Components</Heading>
             <List spacing={2}>
               <ListItem>
@@ -192,12 +190,12 @@ export default function DocsPage() {
                 <Text as="span" fontWeight="bold">Consensus Rules:</Text> PBFT principles used within clusters to finalize tasks
               </ListItem>
             </List>
-            
+
             <Link color="synergy.500" fontWeight="bold">Read the full documentation →</Link>
           </VStack>
         </CardBody>
       </Card>
-      
+
       <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" mb={8}>
         <CardHeader>
           <HStack>
@@ -208,11 +206,11 @@ export default function DocsPage() {
         <CardBody>
           <VStack align="start" spacing={4}>
             <Text>
-              Synergy Network implements quantum-resistant cryptographic algorithms to ensure long-term security 
-              against potential threats from quantum computers. The network uses Dilithium-3 as its primary signature 
+              Synergy Network implements quantum-resistant cryptographic algorithms to ensure long-term security
+              against potential threats from quantum computers. The network uses Dilithium-3 as its primary signature
               scheme and Kyber for hybrid encryption where needed.
             </Text>
-            
+
             <Heading size="sm">Implementation Details</Heading>
             <List spacing={2}>
               <ListItem>
@@ -232,15 +230,15 @@ export default function DocsPage() {
                 <Text as="span" fontWeight="bold">Address Encoding:</Text> Bech32m with sYnQ or sYnU prefix
               </ListItem>
             </List>
-            
+
             <Link color="synergy.500" fontWeight="bold">Read the full documentation →</Link>
           </VStack>
         </CardBody>
       </Card>
-      
+
       {/* API Reference Preview */}
       <Heading size="lg" mb={4}>API Reference</Heading>
-      
+
       <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" mb={8}>
         <CardHeader>
           <HStack>
@@ -251,20 +249,20 @@ export default function DocsPage() {
         <CardBody>
           <VStack align="start" spacing={4}>
             <Text>
-              Synergy Network provides a comprehensive JSON-RPC API for interacting with the blockchain. 
+              Synergy Network provides a comprehensive JSON-RPC API for interacting with the blockchain.
               Below are some of the most commonly used endpoints:
             </Text>
-            
-            <Box 
-              w="100%" 
-              p={4} 
-              bg="gray.50" 
-              borderRadius="md" 
-              fontFamily="monospace" 
+
+            <Box
+              w="100%"
+              p={4}
+              bg="gray.50"
+              borderRadius="md"
+              fontFamily="monospace"
               fontSize="sm"
               overflowX="auto"
             >
-              <Text fontWeight="bold" mb={2}>// Get current block number</Text>
+              <Text fontWeight="bold" mb={2}>{'// Get current block number'}</Text>
               <Text>{'{'}</Text>
               <Text ml={4}>"jsonrpc": "2.0",</Text>
               <Text ml={4}>"method": "syn_blockNumber",</Text>
@@ -272,17 +270,17 @@ export default function DocsPage() {
               <Text ml={4}>"id": 1</Text>
               <Text>{'}'}</Text>
             </Box>
-            
-            <Box 
-              w="100%" 
-              p={4} 
-              bg="gray.50" 
-              borderRadius="md" 
-              fontFamily="monospace" 
+
+            <Box
+              w="100%"
+              p={4}
+              bg="gray.50"
+              borderRadius="md"
+              fontFamily="monospace"
               fontSize="sm"
               overflowX="auto"
             >
-              <Text fontWeight="bold" mb={2}>// Get balance for address</Text>
+              <Text fontWeight="bold" mb={2}>{'// Get balance for address'}</Text>
               <Text>{'{'}</Text>
               <Text ml={4}>"jsonrpc": "2.0",</Text>
               <Text ml={4}>"method": "syn_getBalance",</Text>
@@ -290,15 +288,15 @@ export default function DocsPage() {
               <Text ml={4}>"id": 1</Text>
               <Text>{'}'}</Text>
             </Box>
-            
+
             <Link color="synergy.500" fontWeight="bold">View full API reference →</Link>
           </VStack>
         </CardBody>
       </Card>
-      
+
       {/* Documentation Resources */}
       <Heading size="lg" mb={4}>Additional Resources</Heading>
-      
+
       <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6}>
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="100%">
           <CardBody>
@@ -311,7 +309,7 @@ export default function DocsPage() {
             </VStack>
           </CardBody>
         </Card>
-        
+
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="100%">
           <CardBody>
             <VStack>
@@ -323,7 +321,7 @@ export default function DocsPage() {
             </VStack>
           </CardBody>
         </Card>
-        
+
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="100%">
           <CardBody>
             <VStack>
@@ -335,7 +333,7 @@ export default function DocsPage() {
             </VStack>
           </CardBody>
         </Card>
-        
+
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" h="100%">
           <CardBody>
             <VStack>

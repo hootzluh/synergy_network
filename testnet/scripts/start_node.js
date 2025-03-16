@@ -21,7 +21,7 @@ process.env.NODE_ENV = options.production ? 'production' : 'development';
 // Welcome message
 console.log('\n\x1b[36m╔════════════════════════════════════════════════╗');
 console.log('║                                                ║');
-console.log('║             SYNERGY NETWORK NODE              ║');
+console.log('║             SYNERGY NETWORK NODE               ║');
 console.log('║                                                ║');
 console.log('╚════════════════════════════════════════════════╝\x1b[0m\n');
 
@@ -40,21 +40,21 @@ if (!fs.existsSync(options.dataDir)) {
 async function startNode() {
   try {
     console.log('Initializing Synergy Network node...');
-    
+
     // Create node instance
     const node = new SynergyNode();
-    
+
     // Start node
     const result = await node.start();
-    
+
     console.log(`\nNode started successfully!`);
     console.log(`Node ID: ${result.nodeId}`);
     console.log(`Address: ${result.address}`);
     console.log(`Status: ${result.status}`);
-    
+
     // Handle graceful shutdown
     setupShutdownHandlers(node);
-    
+
     return node;
   } catch (error) {
     console.error('Failed to start node:', error);
@@ -70,10 +70,10 @@ function parseArgs(args) {
     testnet: true,
     production: false
   };
-  
+
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
-    
+
     if (arg === '--data-dir' && i + 1 < args.length) {
       options.dataDir = args[++i];
     } else if (arg === '--log-level' && i + 1 < args.length) {
@@ -89,7 +89,7 @@ function parseArgs(args) {
       process.exit(0);
     }
   }
-  
+
   return options;
 }
 
@@ -116,34 +116,34 @@ function setupShutdownHandlers(node) {
     // await node.stop();
     process.exit(0);
   };
-  
+
   // Handle Ctrl+C
   process.on('SIGINT', shutdown);
-  
+
   // Handle termination signal
   process.on('SIGTERM', shutdown);
-  
+
   // Handle uncaught exceptions
   process.on('uncaughtException', (error) => {
     console.error('Uncaught exception:', error);
     shutdown();
   });
-  
+
   // Set up interactive console
   if (process.stdin.isTTY) {
     console.log('\nPress Ctrl+C to shutdown');
-    
+
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
       prompt: 'synergy> '
     });
-    
+
     rl.prompt();
-    
+
     rl.on('line', async (line) => {
       const cmd = line.trim();
-      
+
       if (cmd === 'exit' || cmd === 'quit') {
         await shutdown();
       } else if (cmd === 'help') {
@@ -176,7 +176,7 @@ Available commands:
         console.log(`Unknown command: ${cmd}`);
         console.log('Type "help" for available commands');
       }
-      
+
       rl.prompt();
     });
   }

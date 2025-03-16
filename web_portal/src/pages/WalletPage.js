@@ -123,10 +123,10 @@ export default function WalletPage() {
               <Text textAlign="center" maxW="md">
                 Connect your wallet to send and receive SYN tokens, check your balance, and view transaction history.
               </Text>
-              <Button 
+              <Button
                 leftIcon={<FaKey />}
-                colorScheme="synergy" 
-                size="lg" 
+                colorScheme="synergy"
+                size="lg"
                 onClick={handleConnect}
               >
                 Connect Wallet
@@ -142,11 +142,11 @@ export default function WalletPage() {
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
                 <Box>
                   <Heading size="md" mb={4}>Wallet Address</Heading>
-                  <Flex 
-                    p={4} 
-                    bg="gray.50" 
-                    borderRadius="md" 
-                    align="center" 
+                  <Flex
+                    p={4}
+                    bg="gray.50"
+                    borderRadius="md"
+                    align="center"
                     justify="space-between"
                   >
                     <Text fontSize="sm" fontFamily="monospace">
@@ -162,7 +162,7 @@ export default function WalletPage() {
                     </HStack>
                   </Flex>
                 </Box>
-                
+
                 <Box>
                   <Heading size="md" mb={4}>Balance</Heading>
                   <Stat>
@@ -173,7 +173,7 @@ export default function WalletPage() {
               </SimpleGrid>
             </CardBody>
           </Card>
-          
+
           {/* Wallet Tabs */}
           <Tabs colorScheme="synergy" variant="enclosed" isLazy>
             <TabList>
@@ -182,7 +182,7 @@ export default function WalletPage() {
               <Tab><Icon as={FaShieldAlt} mr={2} /> Staking</Tab>
               <Tab><Icon as={FaCog} mr={2} /> Settings</Tab>
             </TabList>
-            
+
             <TabPanels>
               {/* Send Tab */}
               <TabPanel>
@@ -194,23 +194,23 @@ export default function WalletPage() {
                     <VStack spacing={6} align="stretch">
                       <FormControl isRequired>
                         <FormLabel>Recipient Address</FormLabel>
-                        <Input 
-                          placeholder="Enter Synergy address (sYnQ...)" 
+                        <Input
+                          placeholder="Enter Synergy address (sYnQ...)"
                           value={recipientAddress}
                           onChange={(e) => setRecipientAddress(e.target.value)}
                         />
                       </FormControl>
-                      
+
                       <FormControl isRequired>
                         <FormLabel>Amount</FormLabel>
-                        <Input 
-                          placeholder="Enter amount to send" 
+                        <Input
+                          placeholder="Enter amount to send"
                           type="number"
                           value={amount}
                           onChange={(e) => setAmount(e.target.value)}
                         />
                       </FormControl>
-                      
+
                       <FormControl>
                         <FormLabel>Transaction Speed</FormLabel>
                         <Select defaultValue="standard">
@@ -219,24 +219,24 @@ export default function WalletPage() {
                           <option value="fast">Fast (0.005 SYN fee)</option>
                         </Select>
                       </FormControl>
-                      
+
                       <Divider />
-                      
+
                       <HStack justify="space-between">
                         <Text>Transaction Fee:</Text>
                         <Text>0.002 SYN</Text>
                       </HStack>
-                      
+
                       <HStack justify="space-between">
                         <Text fontWeight="bold">Total Amount:</Text>
                         <Text fontWeight="bold">
                           {amount ? (parseFloat(amount) + 0.002).toFixed(3) : '0.002'} SYN
                         </Text>
                       </HStack>
-                      
-                      <Button 
-                        colorScheme="synergy" 
-                        size="lg" 
+
+                      <Button
+                        colorScheme="synergy"
+                        size="lg"
                         leftIcon={<FaPaperPlane />}
                         onClick={handleSend}
                         isDisabled={!recipientAddress || !amount}
@@ -247,7 +247,7 @@ export default function WalletPage() {
                   </CardBody>
                 </Card>
               </TabPanel>
-              
+
               {/* Transactions Tab */}
               <TabPanel>
                 <Card bg={cardBg} borderColor={borderColor} borderWidth="1px">
@@ -271,9 +271,9 @@ export default function WalletPage() {
                           {walletData.transactions.map((tx, index) => (
                             <Tr key={index}>
                               <Td>
-                                <Badge 
+                                <Badge
                                   colorScheme={
-                                    tx.type === 'Received' ? 'green' : 
+                                    tx.type === 'Received' ? 'green' :
                                     tx.type === 'Staking Reward' ? 'purple' : 'orange'
                                   }
                                 >
@@ -295,7 +295,7 @@ export default function WalletPage() {
                   </CardBody>
                 </Card>
               </TabPanel>
-              
+
               {/* Staking Tab */}
               <TabPanel>
                 <Card bg={cardBg} borderColor={borderColor} borderWidth="1px">
@@ -310,38 +310,38 @@ export default function WalletPage() {
                           <StatNumber>5,000 SYN</StatNumber>
                           <StatHelpText>40% of your balance</StatHelpText>
                         </Stat>
-                        
+
                         <Stat>
                           <StatLabel>Estimated Rewards</StatLabel>
                           <StatNumber>45.75 SYN/month</StatNumber>
                           <StatHelpText>11% APY</StatHelpText>
                         </Stat>
-                        
+
                         <Stat>
                           <StatLabel>Next Reward</StatLabel>
                           <StatNumber>~1.5 SYN</StatNumber>
                           <StatHelpText>In 23 hours</StatHelpText>
                         </Stat>
                       </SimpleGrid>
-                      
+
                       <Divider />
-                      
+
                       <Heading size="sm">Stake Additional Tokens</Heading>
-                      
+
                       <HStack>
                         <Input placeholder="Enter amount to stake" />
                         <Button colorScheme="synergy">Stake</Button>
                       </HStack>
-                      
+
                       <Divider />
-                      
+
                       <Heading size="sm">Unstake Tokens</Heading>
-                      
+
                       <HStack>
                         <Input placeholder="Enter amount to unstake" />
                         <Button variant="outline" colorScheme="synergy">Unstake</Button>
                       </HStack>
-                      
+
                       <Text fontSize="sm" color="gray.500">
                         Note: Unstaking has a 7-day cooldown period before tokens are returned to your wallet.
                       </Text>
@@ -349,7 +349,7 @@ export default function WalletPage() {
                   </CardBody>
                 </Card>
               </TabPanel>
-              
+
               {/* Settings Tab */}
               <TabPanel>
                 <Card bg={cardBg} borderColor={borderColor} borderWidth="1px">
@@ -366,7 +366,7 @@ export default function WalletPage() {
                           <option value="fast">Fast</option>
                         </Select>
                       </FormControl>
-                      
+
                       <FormControl>
                         <FormLabel>Display Currency</FormLabel>
                         <Select defaultValue="usd">
@@ -376,21 +376,21 @@ export default function WalletPage() {
                           <option value="jpy">JPY</option>
                         </Select>
                       </FormControl>
-                      
+
                       <Divider />
-                      
+
                       <Heading size="sm">Security</Heading>
-                      
+
                       <Button leftIcon={<FaKey />} colorScheme="synergy" variant="outline">
                         Export Private Key
                       </Button>
-                      
+
                       <Button leftIcon={<FaShieldAlt />} colorScheme="synergy" variant="outline">
                         Enable 2FA
                       </Button>
-                      
+
                       <Divider />
-                      
+
                       <Button colorScheme="red" variant="outline">
                         Disconnect Wallet
                       </Button>

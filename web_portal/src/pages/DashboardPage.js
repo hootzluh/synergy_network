@@ -48,7 +48,7 @@ const StatCard = ({ title, value, helpText, icon, change, isIncrease }) => {
     <Card bg={cardBg} borderColor={borderColor} borderWidth="1px">
       <CardBody>
         <Flex justify="space-between">
-          <Box>
+          <Stat>
             <StatLabel>{title}</StatLabel>
             <StatNumber>{value}</StatNumber>
             {helpText && (
@@ -59,7 +59,7 @@ const StatCard = ({ title, value, helpText, icon, change, isIncrease }) => {
                 {helpText}
               </StatHelpText>
             )}
-          </Box>
+          </Stat>
           <Flex
             w={12}
             h={12}
@@ -89,13 +89,13 @@ export default function DashboardPage() {
   return (
     <Container maxW="7xl" py={8}>
       <Heading as="h1" mb={8}>Network Dashboard</Heading>
-      
+
       {/* Network Status Banner */}
-      <Card 
-        bg="synergy.500" 
-        color="white" 
-        mb={8} 
-        borderRadius="lg" 
+      <Card
+        bg="synergy.500"
+        color="white"
+        mb={8}
+        borderRadius="lg"
         overflow="hidden"
       >
         <CardBody>
@@ -112,39 +112,39 @@ export default function DashboardPage() {
           </Flex>
         </CardBody>
       </Card>
-      
+
       {/* Main Stats */}
       <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6} mb={8}>
-        <StatCard 
-          title="Blocks" 
-          value={formatNumber(networkStats.blocks)} 
-          helpText="Last block: 2 seconds ago" 
-          icon={<Icon as={FaCubes} w={6} h={6} />} 
+        <StatCard
+          title="Blocks"
+          value={formatNumber(networkStats.blocks)}
+          helpText="Last block: 2 seconds ago"
+          icon={<Icon as={FaCubes} w={6} h={6} />}
         />
-        <StatCard 
-          title="Transactions" 
-          value={formatNumber(networkStats.transactions)} 
-          helpText="24h: +156,789" 
-          icon={<Icon as={FaExchangeAlt} w={6} h={6} />} 
+        <StatCard
+          title="Transactions"
+          value={formatNumber(networkStats.transactions)}
+          helpText="24h: +156,789"
+          icon={<Icon as={FaExchangeAlt} w={6} h={6} />}
           change={true}
           isIncrease={true}
         />
-        <StatCard 
-          title="Validators" 
-          value={networkStats.validators} 
-          helpText={`${networkStats.activeClusters} active clusters`} 
-          icon={<Icon as={FaUsers} w={6} h={6} />} 
+        <StatCard
+          title="Validators"
+          value={networkStats.validators}
+          helpText={`${networkStats.activeClusters} active clusters`}
+          icon={<Icon as={FaUsers} w={6} h={6} />}
         />
-        <StatCard 
-          title="Active Nodes" 
-          value={formatNumber(networkStats.activeNodes)} 
-          helpText="10% increase this week" 
-          icon={<Icon as={FaServer} w={6} h={6} />} 
+        <StatCard
+          title="Active Nodes"
+          value={formatNumber(networkStats.activeNodes)}
+          helpText="10% increase this week"
+          icon={<Icon as={FaServer} w={6} h={6} />}
           change={true}
           isIncrease={true}
         />
       </SimpleGrid>
-      
+
       {/* Performance Metrics */}
       <Heading as="h2" size="lg" mb={4}>Performance Metrics</Heading>
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} mb={8}>
@@ -162,7 +162,7 @@ export default function DashboardPage() {
             </Stat>
           </CardBody>
         </Card>
-        
+
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px">
           <CardHeader pb={0}>
             <Heading size="md">Transactions Per Second</Heading>
@@ -177,7 +177,7 @@ export default function DashboardPage() {
             </Stat>
           </CardBody>
         </Card>
-        
+
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px">
           <CardHeader pb={0}>
             <Heading size="md">Synergy Points</Heading>
@@ -192,7 +192,7 @@ export default function DashboardPage() {
           </CardBody>
         </Card>
       </SimpleGrid>
-      
+
       {/* Token Economics */}
       <Heading as="h2" size="lg" mb={4}>Token Economics</Heading>
       <Grid templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }} gap={6} mb={8}>
@@ -211,7 +211,7 @@ export default function DashboardPage() {
                     {networkStats.priceChange}%
                   </StatHelpText>
                 </Stat>
-                
+
                 <Stat>
                   <StatLabel>Market Cap</StatLabel>
                   <StatNumber>${formatNumber(networkStats.marketCap)}</StatNumber>
@@ -219,7 +219,7 @@ export default function DashboardPage() {
                     Based on circulating supply
                   </StatHelpText>
                 </Stat>
-                
+
                 <Stat>
                   <StatLabel>Total Supply</StatLabel>
                   <StatNumber>10,000,000,000 SYN</StatNumber>
@@ -227,7 +227,7 @@ export default function DashboardPage() {
                     Fixed maximum supply
                   </StatHelpText>
                 </Stat>
-                
+
                 <Stat>
                   <StatLabel>Total Staked</StatLabel>
                   <StatNumber>{formatNumber(networkStats.totalStaked)} SYN</StatNumber>
@@ -239,7 +239,7 @@ export default function DashboardPage() {
             </CardBody>
           </Card>
         </GridItem>
-        
+
         <GridItem>
           <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" height="100%">
             <CardHeader>
@@ -258,7 +258,7 @@ export default function DashboardPage() {
             </CardBody>
           </Card>
         </GridItem>
-        
+
         <GridItem>
           <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" height="100%">
             <CardHeader>
@@ -278,7 +278,7 @@ export default function DashboardPage() {
           </Card>
         </GridItem>
       </Grid>
-      
+
       {/* Recent Activity */}
       <Heading as="h2" size="lg" mb={4}>Recent Activity</Heading>
       <Card bg={cardBg} borderColor={borderColor} borderWidth="1px">
@@ -294,7 +294,7 @@ export default function DashboardPage() {
               </Flex>
               <Text mt={1}>Cluster #7 was reshuffled with 12 validators</Text>
             </Box>
-            
+
             <Box p={3} borderWidth="1px" borderRadius="md" borderColor={borderColor}>
               <Flex justify="space-between">
                 <Text fontWeight="bold">Large Transaction</Text>
@@ -302,7 +302,7 @@ export default function DashboardPage() {
               </Flex>
               <Text mt={1}>250,000 SYN transferred from Exchange to Validator Pool</Text>
             </Box>
-            
+
             <Box p={3} borderWidth="1px" borderRadius="md" borderColor={borderColor}>
               <Flex justify="space-between">
                 <Text fontWeight="bold">Governance Proposal Passed</Text>
@@ -310,7 +310,7 @@ export default function DashboardPage() {
               </Flex>
               <Text mt={1}>Proposal #23: Adjust minimum validator stake requirement</Text>
             </Box>
-            
+
             <Box p={3} borderWidth="1px" borderRadius="md" borderColor={borderColor}>
               <Flex justify="space-between">
                 <Text fontWeight="bold">Network Upgrade</Text>

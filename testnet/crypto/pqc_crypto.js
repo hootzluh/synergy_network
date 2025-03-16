@@ -14,7 +14,7 @@ class PQCrypto {
       addressPrefix: 'sYnQ',
       addressPrefixTestnet: 'sYnT'
     };
-    
+
     // In a real implementation, this would use actual PQC libraries
     // For this simulation, we'll use standard crypto as a placeholder
     this.useTestnet = process.env.NETWORK_TYPE === 'testnet';
@@ -26,7 +26,7 @@ class PQCrypto {
    */
   async generateKeyPair() {
     console.log(`Generating ${this.config.signatureScheme} key pair`);
-    
+
     // In a real implementation, this would use Dilithium
     // For simulation, we'll use ECDSA as a placeholder
     return new Promise((resolve, reject) => {
@@ -43,7 +43,7 @@ class PQCrypto {
             format: 'pem'
           }
         });
-        
+
         resolve({
           publicKey,
           privateKey,
@@ -63,25 +63,25 @@ class PQCrypto {
    */
   async deriveAddress(publicKey) {
     console.log('Deriving address from public key');
-    
+
     return new Promise((resolve, reject) => {
       try {
         // Hash the public key
-        const hash = crypto.createHash(this.config.hashAlgorithm.toLowerCase().replace('-', ''))
+        const hash = crypto.createHash(this.config.hashAlgorithm.toLowerCase())
           .update(publicKey)
           .digest();
-        
+
         // Take the first 20 bytes and convert to hex
         const addressBytes = hash.slice(0, 20);
         const addressHex = addressBytes.toString('hex');
-        
+
         // Add prefix based on network type
         const prefix = this.useTestnet ? this.config.addressPrefixTestnet : this.config.addressPrefix;
-        
+
         // For a real implementation, we would use a proper encoding like Bech32
         // For simulation, we'll just concatenate the prefix and hex
         const address = `${prefix}${addressHex}`;
-        
+
         resolve(address);
       } catch (error) {
         reject(error);
@@ -97,7 +97,7 @@ class PQCrypto {
    */
   async sign(message, privateKey) {
     console.log(`Signing message using ${this.config.signatureScheme}`);
-    
+
     return new Promise((resolve, reject) => {
       try {
         // In a real implementation, this would use Dilithium
@@ -105,7 +105,7 @@ class PQCrypto {
         const sign = crypto.createSign('SHA256');
         sign.update(message);
         sign.end();
-        
+
         const signature = sign.sign(privateKey, 'hex');
         resolve(signature);
       } catch (error) {
@@ -123,7 +123,7 @@ class PQCrypto {
    */
   async verify(message, signature, publicKey) {
     console.log(`Verifying signature using ${this.config.signatureScheme}`);
-    
+
     return new Promise((resolve, reject) => {
       try {
         // In a real implementation, this would use Dilithium
@@ -131,7 +131,7 @@ class PQCrypto {
         const verify = crypto.createVerify('SHA256');
         verify.update(message);
         verify.end();
-        
+
         const isValid = verify.verify(publicKey, signature, 'hex');
         resolve(isValid);
       } catch (error) {
@@ -146,7 +146,7 @@ class PQCrypto {
    */
   async generateKemKeyPair() {
     console.log(`Generating ${this.config.keyExchangeScheme} KEM key pair`);
-    
+
     // In a real implementation, this would use Kyber
     // For simulation, we'll use ECDH as a placeholder
     return new Promise((resolve, reject) => {
@@ -162,7 +162,7 @@ class PQCrypto {
             format: 'pem'
           }
         });
-        
+
         resolve({
           publicKey,
           privateKey,
@@ -182,18 +182,18 @@ class PQCrypto {
    */
   async encapsulate(recipientPublicKey) {
     console.log(`Encapsulating shared secret using ${this.config.keyExchangeScheme}`);
-    
+
     // In a real implementation, this would use Kyber
     // For simulation, we'll generate a random secret
     return new Promise((resolve, reject) => {
       try {
         // Generate a random secret
         const sharedSecret = crypto.randomBytes(32);
-        
+
         // Encrypt the secret with the recipient's public key
         // This is a placeholder for the actual Kyber encapsulation
         const ciphertext = Buffer.from(recipientPublicKey).toString('base64');
-        
+
         resolve({
           sharedSecret: sharedSecret.toString('hex'),
           ciphertext,
@@ -213,16 +213,16 @@ class PQCrypto {
    */
   async decapsulate(ciphertext, privateKey) {
     console.log(`Decapsulating shared secret using ${this.config.keyExchangeScheme}`);
-    
+
     // In a real implementation, this would use Kyber
     // For simulation, we'll derive a deterministic secret from the inputs
     return new Promise((resolve, reject) => {
       try {
         // This is a placeholder for the actual Kyber decapsulation
-        const hash = crypto.createHash(this.config.hashAlgorithm.toLowerCase().replace('-', ''))
+        const hash = crypto.createHash(this.config.hashAlgorithm.toLowerCase())
           .update(ciphertext + privateKey)
           .digest();
-        
+
         resolve(hash.toString('hex'));
       } catch (error) {
         reject(error);
@@ -237,13 +237,13 @@ class PQCrypto {
    */
   async hash(data) {
     console.log(`Hashing data using ${this.config.hashAlgorithm}`);
-    
+
     return new Promise((resolve, reject) => {
       try {
-        const hash = crypto.createHash(this.config.hashAlgorithm.toLowerCase().replace('-', ''))
+        const hash = crypto.createHash(this.config.hashAlgorithm.toLowerCase())
           .update(data)
           .digest('hex');
-        
+
         resolve(hash);
       } catch (error) {
         reject(error);
@@ -258,17 +258,17 @@ class PQCrypto {
    */
   async validateAddress(address) {
     console.log(`Validating address: ${address}`);
-    
+
     return new Promise((resolve) => {
       // Check prefix
       const expectedPrefix = this.useTestnet ? this.config.addressPrefixTestnet : this.config.addressPrefix;
-      
+
       if (!address.startsWith(expectedPrefix)) {
         console.log(`Invalid prefix: expected ${expectedPrefix}`);
         resolve(false);
         return;
       }
-      
+
       // Check length (prefix + 40 hex chars)
       const expectedLength = expectedPrefix.length + 40;
       if (address.length !== expectedLength) {
@@ -276,7 +276,7 @@ class PQCrypto {
         resolve(false);
         return;
       }
-      
+
       // Check hex part
       const hexPart = address.substring(expectedPrefix.length);
       const hexRegex = /^[0-9a-f]{40}$/i;
@@ -285,9 +285,9 @@ class PQCrypto {
         resolve(false);
         return;
       }
-      
+
       // In a real implementation, we would also validate a checksum
-      
+
       resolve(true);
     });
   }
