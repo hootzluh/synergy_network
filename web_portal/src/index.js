@@ -1,21 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import './index.css';
-import './parallax.css';
-import './glassmorphism.css';
+import { ChakraProvider } from '@chakra-ui/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { WalletProvider } from './services/walletContext';
 import theme from './theme';
+import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+const AppWrapper = () => {
+  return (
     <ChakraProvider theme={theme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <Router>
+        <WalletProvider>
+          <App />
+        </WalletProvider>
+      </Router>
     </ChakraProvider>
-  </React.StrictMode>
-);
+  );
+};
+
+export default AppWrapper;

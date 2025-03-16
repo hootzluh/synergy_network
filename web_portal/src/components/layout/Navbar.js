@@ -27,6 +27,8 @@ const Links = [
     {name: "Dashboard", path: "/dashboard"},
     {name: "Explorer", path: "/explorer"},
     {name: "Wallet", path: "/wallet"},
+    {name: "Gas Station", path: "/gas-station"},
+    {name: "Settings", path: "/settings"},
     {name: "Docs", path: "/docs"},
 ];
 
@@ -118,9 +120,9 @@ export default function Navbar() {
                                 0x1a2...3b4c
                             </MenuButton>
                             <MenuList className="glass-dark">
-                                <MenuItem>My Wallet</MenuItem>
+                                <MenuItem as={RouterLink} to="/wallet">My Wallet</MenuItem>
                                 <MenuItem>Transactions</MenuItem>
-                                <MenuItem>Settings</MenuItem>
+                                <MenuItem as={RouterLink} to="/settings">Settings</MenuItem>
                                 <MenuItem onClick={() => setIsWalletConnected(false)}>Disconnect</MenuItem>
                             </MenuList>
                         </Menu>
