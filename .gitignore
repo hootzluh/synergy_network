@@ -142,3 +142,13 @@ config/private.json
 orbitdb/
 .datastore/
 .lock
+
+# Mac OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db 

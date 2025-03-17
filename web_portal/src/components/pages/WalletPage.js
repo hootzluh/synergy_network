@@ -41,7 +41,7 @@ import {
   Tooltip
 } from '@chakra-ui/react';
 import { FaWallet, FaPaperPlane, FaHistory, FaQrcode, FaCog, FaKey, FaShieldAlt, FaSignOutAlt, FaSave } from 'react-icons/fa';
-import { useWallet } from '../services/walletContext';
+import { useWallet } from '../../services/walletContext';
 
 export default function WalletPage() {
   const {
@@ -72,7 +72,7 @@ export default function WalletPage() {
   const [autoLockTime, setAutoLockTime] = useState('15');
   const [gasLimit, setGasLimit] = useState('21000');
   const [showTestnetWarning, setShowTestnetWarning] = useState(true);
-  
+
   const toast = useToast();
   const cardBg = useColorModeValue('white', 'gray.700');
   const borderColor = useColorModeValue('gray.200', 'gray.600');
@@ -82,12 +82,12 @@ export default function WalletPage() {
     if (isConnected) {
       // Initial fetch
       refreshWalletData();
-      
+
       // Set up interval for periodic refresh
       const intervalId = setInterval(() => {
         refreshWalletData();
       }, 30000); // Refresh every 30 seconds
-      
+
       // Clean up interval on unmount
       return () => clearInterval(intervalId);
     }
@@ -97,7 +97,7 @@ export default function WalletPage() {
   const handleConnect = async () => {
     try {
       const success = await connectWallet();
-      
+
       if (success) {
         toast({
           title: 'Wallet connected',
@@ -121,7 +121,7 @@ export default function WalletPage() {
   // Handle wallet disconnection
   const handleDisconnect = () => {
     disconnectWallet();
-    
+
     toast({
       title: 'Wallet disconnected',
       description: 'Successfully disconnected your wallet',
@@ -143,10 +143,10 @@ export default function WalletPage() {
       });
       return;
     }
-    
+
     try {
       const result = await sendTransaction(recipientAddress, amount);
-      
+
       toast({
         title: 'Transaction sent',
         description: `Successfully sent ${amount} SYN to ${recipientAddress.substring(0, 6)}...${recipientAddress.substring(recipientAddress.length - 4)}`,
@@ -154,7 +154,7 @@ export default function WalletPage() {
         duration: 5000,
         isClosable: true,
       });
-      
+
       // Reset form
       setRecipientAddress('');
       setAmount('');
@@ -181,10 +181,10 @@ export default function WalletPage() {
       });
       return;
     }
-    
+
     try {
       const result = await stakeTokens(stakeAmount);
-      
+
       toast({
         title: 'Tokens staked',
         description: `Successfully staked ${stakeAmount} SYN`,
@@ -192,7 +192,7 @@ export default function WalletPage() {
         duration: 5000,
         isClosable: true,
       });
-      
+
       // Reset form
       setStakeAmount('');
     } catch (err) {
@@ -218,10 +218,10 @@ export default function WalletPage() {
       });
       return;
     }
-    
+
     try {
       const result = await unstakeTokens(unstakeAmount);
-      
+
       toast({
         title: 'Tokens unstaked',
         description: `Successfully unstaked ${unstakeAmount} SYN`,
@@ -229,7 +229,7 @@ export default function WalletPage() {
         duration: 5000,
         isClosable: true,
       });
-      
+
       // Reset form
       setUnstakeAmount('');
     } catch (err) {
@@ -259,7 +259,7 @@ export default function WalletPage() {
   const handleNetworkSwitch = async (newNetwork) => {
     try {
       const success = await switchNetwork(newNetwork);
-      
+
       if (success) {
         toast({
           title: 'Network switched',
@@ -284,11 +284,11 @@ export default function WalletPage() {
     <Container maxW="container.xl" py={8}>
       {/* Testnet Warning Banner */}
       {showTestnetWarning && network === 'testnet' && (
-        <Box 
-          bg="orange.500" 
-          color="white" 
-          p={4} 
-          borderRadius="md" 
+        <Box
+          bg="orange.500"
+          color="white"
+          p={4}
+          borderRadius="md"
           mb={6}
           display="flex"
           justifyContent="space-between"
@@ -297,8 +297,8 @@ export default function WalletPage() {
           <Text fontWeight="bold">
             You are currently on the Synergy Testnet. Tokens have no real value.
           </Text>
-          <Button 
-            size="sm" 
+          <Button
+            size="sm"
             onClick={() => setShowTestnetWarning(false)}
             variant="outline"
             colorScheme="white"
@@ -318,9 +318,9 @@ export default function WalletPage() {
               <Text textAlign="center" maxW="md">
                 Connect your wallet to access your Synergy tokens, view transaction history, and manage your assets.
               </Text>
-              <Button 
-                leftIcon={<FaWallet />} 
-                colorScheme="synergy" 
+              <Button
+                leftIcon={<FaWallet />}
+                colorScheme="synergy"
                 size="lg"
                 isLoading={isLoading}
                 onClick={handleConnect}
@@ -351,9 +351,9 @@ export default function WalletPage() {
                   <Text fontSize="sm" color="gray.500">{walletData?.usdValue || '$0.00'}</Text>
                 </VStack>
                 <HStack justify="flex-end">
-                  <Button 
-                    leftIcon={<FaQrcode />} 
-                    colorScheme="synergy" 
+                  <Button
+                    leftIcon={<FaQrcode />}
+                    colorScheme="synergy"
                     variant="outline"
                     onClick={() => {
                       toast({
@@ -367,9 +367,9 @@ export default function WalletPage() {
                   >
                     Show QR
                   </Button>
-                  <Button 
-                    leftIcon={<FaSignOutAlt />} 
-                    colorScheme="red" 
+                  <Button
+                    leftIcon={<FaSignOutAlt />}
+                    colorScheme="red"
                     variant="outline"
                     onClick={handleDisconnect}
                   >
@@ -400,16 +400,16 @@ export default function WalletPage() {
                     <VStack spacing={6} align="stretch">
                       <FormControl isRequired>
                         <FormLabel>Recipient Address</FormLabel>
-                        <Input 
-                          placeholder="Enter recipient address" 
+                        <Input
+                          placeholder="Enter recipient address"
                           value={recipientAddress}
                           onChange={(e) => setRecipientAddress(e.target.value)}
                         />
                       </FormControl>
                       <FormControl isRequired>
                         <FormLabel>Amount (SYN)</FormLabel>
-                        <Input 
-                          placeholder="Enter amount to send" 
+                        <Input
+                          placeholder="Enter amount to send"
                           type="number"
                           value={amount}
                           onChange={(e) => setAmount(e.target.value)}
@@ -420,7 +420,7 @@ export default function WalletPage() {
                       </FormControl>
                       <FormControl>
                         <FormLabel>Transaction Speed</FormLabel>
-                        <Select 
+                        <Select
                           value={txSpeed}
                           onChange={(e) => setTxSpeed(e.target.value)}
                         >
@@ -429,9 +429,9 @@ export default function WalletPage() {
                           <option value="fast">Fast (High Fee)</option>
                         </Select>
                       </FormControl>
-                      <Button 
-                        leftIcon={<FaPaperPlane />} 
-                        colorScheme="synergy" 
+                      <Button
+                        leftIcon={<FaPaperPlane />}
+                        colorScheme="synergy"
                         size="lg"
                         isLoading={isLoading}
                         onClick={handleSendTransaction}
@@ -523,12 +523,12 @@ export default function WalletPage() {
                       <Divider />
                       <Heading size="sm">Stake Additional Tokens</Heading>
                       <HStack>
-                        <Input 
-                          placeholder="Enter amount to stake" 
+                        <Input
+                          placeholder="Enter amount to stake"
                           value={stakeAmount}
                           onChange={(e) => setStakeAmount(e.target.value)}
                         />
-                        <Button 
+                        <Button
                           colorScheme="synergy"
                           isLoading={isLoading}
                           onClick={handleStakeTokens}
@@ -539,13 +539,13 @@ export default function WalletPage() {
                       <Divider />
                       <Heading size="sm">Unstake Tokens</Heading>
                       <HStack>
-                        <Input 
-                          placeholder="Enter amount to unstake" 
+                        <Input
+                          placeholder="Enter amount to unstake"
                           value={unstakeAmount}
                           onChange={(e) => setUnstakeAmount(e.target.value)}
                         />
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           colorScheme="synergy"
                           isLoading={isLoading}
                           onClick={handleUnstakeTokens}
@@ -571,7 +571,7 @@ export default function WalletPage() {
                     <VStack spacing={6} align="stretch">
                       <FormControl>
                         <FormLabel>Default Transaction Speed</FormLabel>
-                        <Select 
+                        <Select
                           value={txSpeed}
                           onChange={(e) => setTxSpeed(e.target.value)}
                         >
@@ -580,10 +580,10 @@ export default function WalletPage() {
                           <option value="fast">Fast (High Fee)</option>
                         </Select>
                       </FormControl>
-                      
+
                       <FormControl>
                         <FormLabel>Display Currency</FormLabel>
-                        <Select 
+                        <Select
                           value={displayCurrency}
                           onChange={(e) => setDisplayCurrency(e.target.value)}
                         >
@@ -593,10 +593,10 @@ export default function WalletPage() {
                           <option value="jpy">JPY</option>
                         </Select>
                       </FormControl>
-                      
+
                       <FormControl>
                         <FormLabel>Network</FormLabel>
-                        <Select 
+                        <Select
                           value={network}
                           onChange={(e) => handleNetworkSwitch(e.target.value)}
                         >
@@ -609,19 +609,19 @@ export default function WalletPage() {
                           </Text>
                         )}
                       </FormControl>
-                      
+
                       <FormControl>
                         <FormLabel>Default Gas Limit</FormLabel>
-                        <Input 
+                        <Input
                           value={gasLimit}
                           onChange={(e) => setGasLimit(e.target.value)}
                           type="number"
                         />
                       </FormControl>
-                      
+
                       <FormControl>
                         <FormLabel>Auto-Lock Wallet After (minutes)</FormLabel>
-                        <Select 
+                        <Select
                           value={autoLockTime}
                           onChange={(e) => setAutoLockTime(e.target.value)}
                         >
@@ -632,43 +632,43 @@ export default function WalletPage() {
                           <option value="never">Never</option>
                         </Select>
                       </FormControl>
-                      
+
                       <FormControl display="flex" alignItems="center">
                         <FormLabel mb="0">
                           Enable Transaction Notifications
                         </FormLabel>
-                        <Switch 
-                          colorScheme="synergy" 
+                        <Switch
+                          colorScheme="synergy"
                           isChecked={notifications}
                           onChange={(e) => setNotifications(e.target.checked)}
                         />
                       </FormControl>
-                      
+
                       <Divider />
                       <Heading size="sm">Security</Heading>
-                      
+
                       <Button leftIcon={<FaKey />} colorScheme="synergy" variant="outline">
                         Export Private Key
                       </Button>
-                      
+
                       <Button leftIcon={<FaShieldAlt />} colorScheme="synergy" variant="outline">
                         Enable 2FA
                       </Button>
-                      
+
                       <Divider />
-                      
+
                       <HStack spacing={4}>
-                        <Button 
-                          leftIcon={<FaSave />} 
+                        <Button
+                          leftIcon={<FaSave />}
                           colorScheme="synergy"
                           onClick={handleSaveSettings}
                         >
                           Save Settings
                         </Button>
-                        
-                        <Button 
-                          leftIcon={<FaSignOutAlt />} 
-                          colorScheme="red" 
+
+                        <Button
+                          leftIcon={<FaSignOutAlt />}
+                          colorScheme="red"
                           variant="outline"
                           onClick={handleDisconnect}
                         >

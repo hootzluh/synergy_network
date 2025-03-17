@@ -34,7 +34,7 @@ import {
   useDisclosure
 } from '@chakra-ui/react';
 import { FaKey, FaShieldAlt, FaSave, FaSignOutAlt, FaInfoCircle, FaExclamationTriangle } from 'react-icons/fa';
-import { useWallet } from '../services/walletContext';
+import { useWallet } from '../../services/walletContext';
 
 export default function SettingsPage() {
   const {
@@ -60,10 +60,10 @@ export default function SettingsPage() {
   const [backupReminder, setBackupReminder] = useState(true);
   const [language, setLanguage] = useState('en');
   const [savedSettings, setSavedSettings] = useState({});
-  
+
   const { isOpen: isExportKeyOpen, onOpen: onExportKeyOpen, onClose: onExportKeyClose } = useDisclosure();
   const { isOpen: isDisconnectOpen, onOpen: onDisconnectOpen, onClose: onDisconnectClose } = useDisclosure();
-  
+
   const toast = useToast();
   const cardBg = useColorModeValue('white', 'gray.700');
   const borderColor = useColorModeValue('gray.200', 'gray.600');
@@ -86,11 +86,11 @@ export default function SettingsPage() {
       backupReminder,
       language
     };
-    
+
     // Save settings to local storage
     localStorage.setItem('synergyWalletSettings', JSON.stringify(settings));
     setSavedSettings(settings);
-    
+
     toast({
       title: 'Settings saved',
       description: 'Your wallet settings have been saved successfully',
@@ -104,7 +104,7 @@ export default function SettingsPage() {
   const handleNetworkSwitch = async (newNetwork) => {
     try {
       const success = await switchNetwork(newNetwork);
-      
+
       if (success) {
         toast({
           title: 'Network switched',
@@ -129,7 +129,7 @@ export default function SettingsPage() {
   const handleDisconnect = () => {
     disconnectWallet();
     onDisconnectClose();
-    
+
     toast({
       title: 'Wallet disconnected',
       description: 'Successfully disconnected your wallet',
@@ -143,7 +143,7 @@ export default function SettingsPage() {
   const handleExportPrivateKey = () => {
     // In a real implementation, this would require additional security measures
     onExportKeyClose();
-    
+
     toast({
       title: 'Security notice',
       description: 'Private key export would be implemented with proper security measures in production',
@@ -156,7 +156,7 @@ export default function SettingsPage() {
   return (
     <Box p={4}>
       <Heading size="lg" mb={6}>Wallet Settings</Heading>
-      
+
       {!isConnected ? (
         <Card bg={cardBg} borderColor={borderColor} borderWidth="1px">
           <CardBody>
@@ -179,7 +179,7 @@ export default function SettingsPage() {
                       <Badge ml={2} colorScheme="orange">Testnet</Badge>
                     )}
                   </FormLabel>
-                  <Select 
+                  <Select
                     value={network}
                     onChange={(e) => handleNetworkSwitch(e.target.value)}
                   >
@@ -192,10 +192,10 @@ export default function SettingsPage() {
                     </Text>
                   )}
                 </FormControl>
-                
+
                 <FormControl>
                   <FormLabel>Default Transaction Speed</FormLabel>
-                  <Select 
+                  <Select
                     value={txSpeed}
                     onChange={(e) => setTxSpeed(e.target.value)}
                   >
@@ -204,16 +204,16 @@ export default function SettingsPage() {
                     <option value="fast">Fast (High Fee)</option>
                   </Select>
                 </FormControl>
-                
+
                 <FormControl>
                   <FormLabel>Default Gas Limit</FormLabel>
-                  <Input 
+                  <Input
                     value={gasLimit}
                     onChange={(e) => setGasLimit(e.target.value)}
                     type="number"
                   />
                 </FormControl>
-                
+
                 {advancedMode && (
                   <FormControl>
                     <FormLabel>
@@ -240,7 +240,7 @@ export default function SettingsPage() {
                     <Text textAlign="right">{gasPrice} Gwei</Text>
                   </FormControl>
                 )}
-                
+
                 {advancedMode && (
                   <FormControl>
                     <FormLabel>
@@ -267,7 +267,7 @@ export default function SettingsPage() {
                     <Text textAlign="right">{slippageTolerance}%</Text>
                   </FormControl>
                 )}
-                
+
                 <FormControl display="flex" alignItems="center">
                   <FormLabel mb="0">
                     Advanced Mode
@@ -277,8 +277,8 @@ export default function SettingsPage() {
                       </Box>
                     </Tooltip>
                   </FormLabel>
-                  <Switch 
-                    colorScheme="synergy" 
+                  <Switch
+                    colorScheme="synergy"
                     isChecked={advancedMode}
                     onChange={(e) => setAdvancedMode(e.target.checked)}
                   />
@@ -286,7 +286,7 @@ export default function SettingsPage() {
               </VStack>
             </CardBody>
           </Card>
-          
+
           {/* Display Settings */}
           <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" mb={6}>
             <CardHeader>
@@ -296,7 +296,7 @@ export default function SettingsPage() {
               <VStack spacing={6} align="stretch">
                 <FormControl>
                   <FormLabel>Display Currency</FormLabel>
-                  <Select 
+                  <Select
                     value={displayCurrency}
                     onChange={(e) => setDisplayCurrency(e.target.value)}
                   >
@@ -309,10 +309,10 @@ export default function SettingsPage() {
                     <option value="inr">INR</option>
                   </Select>
                 </FormControl>
-                
+
                 <FormControl>
                   <FormLabel>Language</FormLabel>
-                  <Select 
+                  <Select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
                   >
@@ -325,11 +325,11 @@ export default function SettingsPage() {
                     <option value="ko">한국어</option>
                   </Select>
                 </FormControl>
-                
+
                 <FormControl display="flex" alignItems="center">
                   <FormLabel mb="0">Dark Theme</FormLabel>
-                  <Switch 
-                    colorScheme="synergy" 
+                  <Switch
+                    colorScheme="synergy"
                     isChecked={darkTheme}
                     onChange={(e) => setDarkTheme(e.target.checked)}
                   />
@@ -337,7 +337,7 @@ export default function SettingsPage() {
               </VStack>
             </CardBody>
           </Card>
-          
+
           {/* Security Settings */}
           <Card bg={cardBg} borderColor={borderColor} borderWidth="1px" mb={6}>
             <CardHeader>
@@ -347,7 +347,7 @@ export default function SettingsPage() {
               <VStack spacing={6} align="stretch">
                 <FormControl>
                   <FormLabel>Auto-Lock Wallet After (minutes)</FormLabel>
-                  <Select 
+                  <Select
                     value={autoLockTime}
                     onChange={(e) => setAutoLockTime(e.target.value)}
                   >
@@ -358,18 +358,18 @@ export default function SettingsPage() {
                     <option value="never">Never</option>
                   </Select>
                 </FormControl>
-                
+
                 <FormControl display="flex" alignItems="center">
                   <FormLabel mb="0">
                     Enable Transaction Notifications
                   </FormLabel>
-                  <Switch 
-                    colorScheme="synergy" 
+                  <Switch
+                    colorScheme="synergy"
                     isChecked={notifications}
                     onChange={(e) => setNotifications(e.target.checked)}
                   />
                 </FormControl>
-                
+
                 <FormControl display="flex" alignItems="center">
                   <FormLabel mb="0">
                     Auto-Approve Trusted Contracts
@@ -379,13 +379,13 @@ export default function SettingsPage() {
                       </Box>
                     </Tooltip>
                   </FormLabel>
-                  <Switch 
-                    colorScheme="synergy" 
+                  <Switch
+                    colorScheme="synergy"
                     isChecked={autoApprove}
                     onChange={(e) => setAutoApprove(e.target.checked)}
                   />
                 </FormControl>
-                
+
                 <FormControl display="flex" alignItems="center">
                   <FormLabel mb="0">
                     Biometric Authentication
@@ -395,13 +395,13 @@ export default function SettingsPage() {
                       </Box>
                     </Tooltip>
                   </FormLabel>
-                  <Switch 
-                    colorScheme="synergy" 
+                  <Switch
+                    colorScheme="synergy"
                     isChecked={biometricAuth}
                     onChange={(e) => setBiometricAuth(e.target.checked)}
                   />
                 </FormControl>
-                
+
                 <FormControl display="flex" alignItems="center">
                   <FormLabel mb="0">
                     Backup Reminder
@@ -411,25 +411,25 @@ export default function SettingsPage() {
                       </Box>
                     </Tooltip>
                   </FormLabel>
-                  <Switch 
-                    colorScheme="synergy" 
+                  <Switch
+                    colorScheme="synergy"
                     isChecked={backupReminder}
                     onChange={(e) => setBackupReminder(e.target.checked)}
                   />
                 </FormControl>
-                
-                <Button 
-                  leftIcon={<FaKey />} 
-                  colorScheme="synergy" 
+
+                <Button
+                  leftIcon={<FaKey />}
+                  colorScheme="synergy"
                   variant="outline"
                   onClick={onExportKeyOpen}
                 >
                   Export Private Key
                 </Button>
-                
-                <Button 
-                  leftIcon={<FaShieldAlt />} 
-                  colorScheme="synergy" 
+
+                <Button
+                  leftIcon={<FaShieldAlt />}
+                  colorScheme="synergy"
                   variant="outline"
                 >
                   Enable 2FA
@@ -437,28 +437,28 @@ export default function SettingsPage() {
               </VStack>
             </CardBody>
           </Card>
-          
+
           {/* Action Buttons */}
           <HStack spacing={4} mt={6}>
-            <Button 
-              leftIcon={<FaSave />} 
+            <Button
+              leftIcon={<FaSave />}
               colorScheme="synergy"
               onClick={handleSaveSettings}
               isLoading={isLoading}
             >
               Save Settings
             </Button>
-            
-            <Button 
-              leftIcon={<FaSignOutAlt />} 
-              colorScheme="red" 
+
+            <Button
+              leftIcon={<FaSignOutAlt />}
+              colorScheme="red"
               variant="outline"
               onClick={onDisconnectOpen}
             >
               Disconnect Wallet
             </Button>
           </HStack>
-          
+
           {/* Export Private Key Modal */}
           <Modal isOpen={isExportKeyOpen} onClose={onExportKeyClose}>
             <ModalOverlay />
@@ -473,7 +473,7 @@ export default function SettingsPage() {
                       <Text fontWeight="bold">Security Warning</Text>
                     </HStack>
                     <Text mt={2}>
-                      Your private key is the ultimate access to your funds. Never share it with anyone, 
+                      Your private key is the ultimate access to your funds. Never share it with anyone,
                       and store it securely. Anyone with your private key can steal your funds.
                     </Text>
                   </Box>
@@ -492,7 +492,7 @@ export default function SettingsPage() {
               </ModalFooter>
             </ModalContent>
           </Modal>
-          
+
           {/* Disconnect Wallet Modal */}
           <Modal isOpen={isDisconnectOpen} onClose={onDisconnectClose}>
             <ModalOverlay />
